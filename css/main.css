@@ -1070,7 +1070,7 @@ header .top-bar {
 	display: block;
 	background: #000000;
 	min-width: 220px;
-	min-height: 66px;
+	min-height: 86px;
 	position: absolute;
 	left: 90px;
 	top: 0;
@@ -1079,7 +1079,7 @@ header .logo {
 	float: left;
 	margin-left: 20px;
 	margin-right: 50px;
-	margin-top: 25px;
+	margin-top: 15px;
 	position: relative;
 }
 header .logo a {
@@ -1090,10 +1090,10 @@ header .logo a {
 	font: 0/0 a;
 	text-shadow: none;
 	color: transparent;
-	width: 92px;
-	height: 15px;
-	background: url("../images/ap.jpg") no-repeat center;
-	background-size: 92px 15px;
+	width: 164px;
+	height: 66px;
+	background: url("../images/ap.png") no-repeat center;
+	background-size: 148px 48px;
 }
 
 /**
