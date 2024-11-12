@@ -1096,10 +1096,38 @@ header .logo a {
 	background-size: 148px 48px;
 }
 
+
 /**
  * menu toggle - (_layout.css)
  * ------------------------------------------------------------------- 
  */
+
+ #chatbotCTA {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	background-color: #FF0077; /* WhatsApp-like green */
+	color: white;
+	padding: 15px;
+	border-radius: 50px;
+	cursor: pointer;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 10px;
+	font-size: 16px;
+	text-align: center;
+	z-index: 1000;
+	margin-bottom: 75px;
+  }
+  
+  #chatbotFrame {
+	position: fixed;
+	bottom: 80px;
+	right: 20px;
+	width: 400px;
+	height: 600px;
+	display: none; /* Hidden by default */
+	z-index: 999;
+  }
+  
 .menu-toggle {
 	float: left;
 	width: 40px;
