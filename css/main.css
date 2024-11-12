@@ -1115,7 +1115,7 @@ header .logo a {
 	font-size: 16px;
 	text-align: center;
 	z-index: 1000;
-	margin-bottom: 75px;
+	margin-bottom: 45px;
   }
   
   #chatbotFrame {
@@ -1126,6 +1126,7 @@ header .logo a {
 	height: 600px;
 	display: none; /* Hidden by default */
 	z-index: 999;
+	margin-bottom: 50px;
   }
   
 .menu-toggle {
@@ -2575,7 +2576,7 @@ footer .copyright span:last-child::after {
 	text-decoration: none;
 	border: 0 none;
 	display: block;
-	height: 6.6rem;
+	height: 5.6rem;
 	width: 6rem;
 	line-height: 6.6rem;
 	text-align: center;
