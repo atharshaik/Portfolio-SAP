@@ -265,8 +265,8 @@
 	});
 
 
- 	/*----------------------------------------------------- */
-  	/* Back to top
+	/*----------------------------------------------------- */
+   	/* Back to top
    ------------------------------------------------------- */ 
 	var pxShow = 300; // height on which the button will show
 	var fadeInTime = 400; // how slow/fast you want the button to show
@@ -287,5 +287,100 @@
 		}		
 
 	});		
+
+
+  /*----------------------------------------------------- */
+  /* Luxury interactions: cursor, magnet, reveals, parallax
+  ------------------------------------------------------- */
+  (function() {
+    var cursorEl = document.getElementById('lux-cursor');
+    if (!cursorEl) return;
+
+    var pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    var target = { x: pos.x, y: pos.y };
+    var ease = 0.18;
+    var rafId = null;
+
+    function animate() {
+      pos.x += (target.x - pos.x) * ease;
+      pos.y += (target.y - pos.y) * ease;
+      cursorEl.style.transform = 'translate3d(' + pos.x + 'px,' + pos.y + 'px,0)';
+      rafId = requestAnimationFrame(animate);
+    }
+    animate();
+
+    window.addEventListener('mousemove', function(e) {
+      target.x = e.clientX;
+      target.y = e.clientY;
+      cursorEl.style.opacity = '1';
+    });
+    window.addEventListener('mouseleave', function() {
+      cursorEl.style.opacity = '0';
+    });
+
+    function magnetize(el) {
+      var strength = 12;
+      var rect, centerX, centerY;
+
+      function onMove(e) {
+        rect = el.getBoundingClientRect();
+        centerX = rect.left + rect.width / 2;
+        centerY = rect.top + rect.height / 2;
+        var dx = (e.clientX - centerX) / rect.width;
+        var dy = (e.clientY - centerY) / rect.height;
+        el.style.transform = 'translate(' + (dx * strength) + 'px,' + (dy * strength) + 'px)';
+      }
+      function onEnter() {
+        cursorEl.style.width = '32px';
+        cursorEl.style.height = '32px';
+        cursorEl.style.marginLeft = '-16px';
+        cursorEl.style.marginTop = '-16px';
+        cursorEl.style.boxShadow = '0 0 40px rgba(212,175,55,0.35)';
+      }
+      function onLeave() {
+        el.style.transform = 'translate(0,0)';
+        cursorEl.style.width = '24px';
+        cursorEl.style.height = '24px';
+        cursorEl.style.marginLeft = '-12px';
+        cursorEl.style.marginTop = '-12px';
+        cursorEl.style.boxShadow = '0 0 30px rgba(212,175,55,0.25)';
+      }
+      el.addEventListener('mousemove', onMove);
+      el.addEventListener('mouseenter', onEnter);
+      el.addEventListener('mouseleave', onLeave);
+    }
+
+    var magnetTargets = document.querySelectorAll('.main-navigation a, .button, .logo a');
+    magnetTargets.forEach(function(el) { magnetize(el); });
+
+    // Reveal on scroll
+    var revealTargets = document.querySelectorAll('.section-intro, .service, .folio-item, .timeline-block');
+    revealTargets.forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealTargets.forEach(function(el){ io.observe(el); });
+
+    // Subtle parallax in hero
+    var intro = document.getElementById('intro');
+    var introContent = intro ? intro.querySelector('.intro-content') : null;
+    if (intro && introContent) {
+      intro.addEventListener('mousemove', function(e) {
+        var rect = intro.getBoundingClientRect();
+        var dx = (e.clientX - (rect.left + rect.width/2)) / rect.width;
+        var dy = (e.clientY - (rect.top + rect.height/2)) / rect.height;
+        introContent.style.transform = 'translate3d(' + (dx * 14) + 'px,' + (dy * 14) + 'px,0)';
+      });
+      intro.addEventListener('mouseleave', function(){
+        introContent.style.transform = 'translate3d(0,0,0)';
+      });
+    }
+
+  })();
 
 })(jQuery);
